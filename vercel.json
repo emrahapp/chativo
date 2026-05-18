@@ -1,8 +1,0 @@
-{
-  "$schema": "https://openapi.vercel.sh/vercel.json",
-  "buildCommand": "pnpm --filter @chativo/web build",
-  "installCommand": "pnpm install --frozen-lockfile=false",
-  "outputDirectory": "apps/web/.next",
-  "framework": "nextjs",
-  "regions": ["fra1"]
-}
