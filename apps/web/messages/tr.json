@@ -1,0 +1,109 @@
+{
+  "brand": {
+    "name": "Chativo",
+    "tagline": "Yapay Zekâ Müşteri Temsilcisi"
+  },
+  "nav": {
+    "features": "Özellikler",
+    "pricing": "Fiyatlandırma",
+    "demo": "Demo",
+    "resources": "Kaynaklar",
+    "login": "Giriş Yap",
+    "register": "Ücretsiz Başla"
+  },
+  "hero": {
+    "badge": "Yapay Zekâ Destek Asistanı",
+    "title_a": "Web sitenize",
+    "title_highlight": "kendi işinizi bilen",
+    "title_b": "yapay zekâ temsilcisi ekleyin.",
+    "subtitle": "Web sitenizi, dosyalarınızı ve bilgi bankanızı yükleyin. Yapay zekâ asistanınız müşterilerinizin sorularını 7/24 yanıtlasın, lead toplasın ve destek yükünüzü azaltsın.",
+    "cta_primary": "Ücretsiz Başla",
+    "cta_secondary": "Demo Botu Gör",
+    "trusted_by": "Binlerce işletme yapay zekâ asistanını kullanıyor"
+  },
+  "how_it_works": {
+    "title": "Nasıl Çalışır?",
+    "subtitle": "Dört adımda işletmenize özel yapay zekâ asistanı.",
+    "step1_title": "Verini yükle",
+    "step1_desc": "Web siteni, PDF'lerini ve SSS'lerini sisteme yükle.",
+    "step2_title": "Botunu özelleştir",
+    "step2_desc": "Adını, rengini, tonunu ve karşılama mesajını ayarla.",
+    "step3_title": "Widget kodunu ekle",
+    "step3_desc": "Tek satır JavaScript ile sitene ekle.",
+    "step4_title": "Soruları otomatik yanıtla",
+    "step4_desc": "Botun ziyaretçilerine 7/24 cevap versin."
+  },
+  "features": {
+    "title": "Her şey dahil",
+    "subtitle": "Müşteri desteği için ihtiyacınız olan tüm özellikler.",
+    "items": {
+      "website": { "title": "Web sitesiyle eğitme", "desc": "Web sitenizi gezerek içeriği otomatik öğrenir." },
+      "files":   { "title": "PDF/DOCX/TXT yükleme", "desc": "Dokümanlarınızı yükleyin, bot tüm bilgileri kavrar." },
+      "widget":  { "title": "AI chat widget", "desc": "Tek satır kodla sitenize entegre olur." },
+      "leads":   { "title": "Lead toplama", "desc": "Cevap bulamadığında otomatik iletişim formu gösterir." },
+      "history": { "title": "Konuşma geçmişi", "desc": "Tüm konuşmaları kayıt altına alır ve analiz edin." },
+      "multilang": { "title": "Çoklu dil desteği", "desc": "TR ve EN dahil onlarca dilde otomatik cevap." },
+      "brand":   { "title": "Marka özelleştirme", "desc": "Logo, renk ve avatar ile markanıza özel görünüm." },
+      "safe":    { "title": "Güvenli cevaplama", "desc": "Yalnızca yüklediğiniz bilgilerle cevap verir, uydurmaz." }
+    }
+  },
+  "use_cases": {
+    "title": "Kimler kullanıyor?",
+    "subtitle": "Her sektöre uygun, kolay kurulan bir AI asistanı.",
+    "ecommerce": "E-ticaret",
+    "saas": "SaaS şirketleri",
+    "clinics": "Klinikler",
+    "education": "Eğitim kurumları",
+    "realestate": "Emlak",
+    "services": "Hizmet işletmeleri",
+    "agencies": "Ajanslar"
+  },
+  "pricing": {
+    "title": "Şeffaf fiyatlandırma",
+    "subtitle": "İhtiyacınıza göre seçin, istediğiniz an yükseltin.",
+    "monthly": "Aylık",
+    "yearly": "Yıllık",
+    "yearly_off": "%17 indirim",
+    "cta": "Başla",
+    "cta_pro": "En popüler seçim",
+    "free": {
+      "name": "Free",
+      "price": "₺0",
+      "features": ["1 chatbot", "50 mesaj/ay", "1 veri kaynağı", "Chativo branding"]
+    },
+    "starter": {
+      "name": "Starter",
+      "price": "₺499",
+      "features": ["1 chatbot", "1.000 mesaj/ay", "Web sitesi + dosya eğitimi", "Lead toplama", "Konuşma kayıtları"]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "₺1.299",
+      "features": ["5 chatbot", "10.000 mesaj/ay", "Gelişmiş özelleştirme", "Branding kaldırma", "Ekip erişimi"]
+    },
+    "agency": {
+      "name": "Agency",
+      "price": "₺3.999",
+      "features": ["Çoklu müşteri", "White-label hazırlığı", "Özel domain", "Yüksek limitler"]
+    }
+  },
+  "faq": {
+    "title": "Sıkça sorulan sorular",
+    "items": [
+      { "q": "Bot nasıl eğitiliyor?", "a": "Web sitenizi, PDF'lerinizi veya manuel metinlerinizi yüklersiniz. Sistem içeriği işler ve botunuz yalnızca bu bilgi tabanına göre cevap verir." },
+      { "q": "Web siteme nasıl eklerim?", "a": "Botunuzu oluşturduktan sonra size verilen tek satırlık JavaScript kodunu sitenizin body kapanışından önce eklersiniz. Widget otomatik olarak sağ altta görünür." },
+      { "q": "Kod bilgisi gerekiyor mu?", "a": "Hayır. Wizard adımlarını takip ederek 5 dakikada botunuzu oluşturabilirsiniz." },
+      { "q": "Türkçe ve İngilizce çalışıyor mu?", "a": "Evet. Botunuz ziyaretçinin diline göre otomatik cevap verir." },
+      { "q": "Verilerim güvenli mi?", "a": "Tüm veriler şifreli olarak saklanır ve yalnızca sizin botlarınız erişebilir. KVKK ve GDPR uyumlu çalışıyoruz." },
+      { "q": "Bot yanlış cevap verirse ne olur?", "a": "Bot yalnızca bilgi tabanınızdaki içeriklere göre cevap verir. Cevap bulamazsa lead formu gösterir ya da iletişim bilgisi ister." },
+      { "q": "Ücretsiz deneyebilir miyim?", "a": "Evet, Free planda kredi kartı olmadan başlayabilirsiniz." }
+    ]
+  },
+  "footer": {
+    "copy": "© 2026 Chativo. Tüm hakları saklıdır.",
+    "product": "Ürün",
+    "company": "Şirket",
+    "legal": "Yasal",
+    "support": "Destek"
+  }
+}

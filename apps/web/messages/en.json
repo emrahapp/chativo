@@ -1,0 +1,109 @@
+{
+  "brand": {
+    "name": "Chativo",
+    "tagline": "AI Support Assistant"
+  },
+  "nav": {
+    "features": "Features",
+    "pricing": "Pricing",
+    "demo": "Demo",
+    "resources": "Resources",
+    "login": "Sign in",
+    "register": "Start free"
+  },
+  "hero": {
+    "badge": "AI Support Assistant",
+    "title_a": "Add an",
+    "title_highlight": "AI support agent trained on your business",
+    "title_b": "to your website.",
+    "subtitle": "Train your chatbot with your website, files, and knowledge base. Let it answer customer questions 24/7, collect leads, and reduce support workload.",
+    "cta_primary": "Start free",
+    "cta_secondary": "See demo bot",
+    "trusted_by": "Thousands of businesses trust Chativo"
+  },
+  "how_it_works": {
+    "title": "How it works",
+    "subtitle": "A tailor-made AI assistant for your business in four steps.",
+    "step1_title": "Upload your data",
+    "step1_desc": "Add your website, PDFs, and FAQs to the system.",
+    "step2_title": "Customize your bot",
+    "step2_desc": "Set its name, color, tone, and welcome message.",
+    "step3_title": "Add the widget code",
+    "step3_desc": "Paste one line of JavaScript on your site.",
+    "step4_title": "Answer questions 24/7",
+    "step4_desc": "Your bot replies to visitors automatically."
+  },
+  "features": {
+    "title": "Everything included",
+    "subtitle": "All the features you need for customer support.",
+    "items": {
+      "website": { "title": "Website training", "desc": "Crawls your site and learns content automatically." },
+      "files":   { "title": "PDF/DOCX/TXT upload", "desc": "Upload your documents; the bot ingests everything." },
+      "widget":  { "title": "AI chat widget", "desc": "Embed on your site with a single line of code." },
+      "leads":   { "title": "Lead capture", "desc": "Shows a contact form when the bot can't answer." },
+      "history": { "title": "Conversation history", "desc": "Every chat is recorded and analyzable." },
+      "multilang": { "title": "Multilingual", "desc": "Auto-detects and replies in the visitor's language." },
+      "brand":   { "title": "Brand customization", "desc": "Match logo, color, and avatar to your brand." },
+      "safe":    { "title": "Safe answering", "desc": "Replies only from the knowledge you uploaded — no hallucinations." }
+    }
+  },
+  "use_cases": {
+    "title": "Who uses Chativo?",
+    "subtitle": "An easy-to-deploy AI assistant for every industry.",
+    "ecommerce": "E-commerce",
+    "saas": "SaaS companies",
+    "clinics": "Clinics",
+    "education": "Education",
+    "realestate": "Real estate",
+    "services": "Services",
+    "agencies": "Agencies"
+  },
+  "pricing": {
+    "title": "Simple pricing",
+    "subtitle": "Pick what fits, upgrade whenever you need.",
+    "monthly": "Monthly",
+    "yearly": "Yearly",
+    "yearly_off": "17% off",
+    "cta": "Get started",
+    "cta_pro": "Most popular",
+    "free": {
+      "name": "Free",
+      "price": "$0",
+      "features": ["1 chatbot", "50 messages/mo", "1 data source", "Chativo branding"]
+    },
+    "starter": {
+      "name": "Starter",
+      "price": "$19",
+      "features": ["1 chatbot", "1,000 messages/mo", "Website + file training", "Lead capture", "Conversation logs"]
+    },
+    "pro": {
+      "name": "Pro",
+      "price": "$49",
+      "features": ["5 chatbots", "10,000 messages/mo", "Advanced customization", "Remove branding", "Team access"]
+    },
+    "agency": {
+      "name": "Agency",
+      "price": "$149",
+      "features": ["Multi-client", "White-label ready", "Custom domain", "High limits"]
+    }
+  },
+  "faq": {
+    "title": "Frequently asked questions",
+    "items": [
+      { "q": "How is the bot trained?", "a": "Upload your website, PDFs, or manual text. The system processes the content and your bot answers strictly from that knowledge." },
+      { "q": "How do I add it to my site?", "a": "After creating the bot, copy the single-line JavaScript snippet and paste it before the closing body tag. The widget appears in the corner automatically." },
+      { "q": "Do I need coding skills?", "a": "No. Follow the wizard and you'll have a bot in 5 minutes." },
+      { "q": "Does it work in Turkish and English?", "a": "Yes. The bot automatically replies in the visitor's language." },
+      { "q": "Is my data safe?", "a": "All data is encrypted and only your own bots can access it. GDPR and KVKK compliant." },
+      { "q": "What if the bot gives a wrong answer?", "a": "The bot only answers from your knowledge base. If it can't find the answer, it shows a lead form or asks for contact info." },
+      { "q": "Can I try it for free?", "a": "Yes — start on the Free plan without a credit card." }
+    ]
+  },
+  "footer": {
+    "copy": "© 2026 Chativo. All rights reserved.",
+    "product": "Product",
+    "company": "Company",
+    "legal": "Legal",
+    "support": "Support"
+  }
+}

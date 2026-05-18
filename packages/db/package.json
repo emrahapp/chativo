@@ -1,0 +1,7 @@
+{
+  "name": "@chativo/db",
+  "private": true,
+  "version": "0.1.0",
+  "main": "types.gen.ts",
+  "types": "types.gen.ts"
+}

@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Background / surfaces */
+    --background: 240 33% 99%;       /* #FAFAFF */
+    --foreground: 220 39% 11%;       /* #111827 */
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 39% 11%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 39% 11%;
+
+    /* Brand purple as primary (shadcn semantic) */
+    --primary: 247 77% 62%;          /* #6554E8 */
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 240 9% 96%;
+    --secondary-foreground: 220 39% 11%;
+
+    --muted: 240 11% 96%;
+    --muted-foreground: 220 9% 46%;  /* #6B7280 */
+
+    --accent: 247 100% 97%;          /* #F0EEFF */
+    --accent-foreground: 247 77% 50%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 240 18% 94%;           /* #ECECF4 */
+    --input: 240 18% 94%;
+    --ring: 247 77% 62%;
+
+    --radius: 0.75rem;
+  }
+
+  .dark {
+    --background: 225 30% 8%;
+    --foreground: 0 0% 98%;
+    --card: 225 25% 12%;
+    --card-foreground: 0 0% 98%;
+    --popover: 225 25% 12%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 247 77% 62%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 225 25% 18%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 225 25% 18%;
+    --muted-foreground: 220 9% 65%;
+    --accent: 247 50% 25%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 70% 50%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 225 25% 20%;
+    --input: 225 25% 20%;
+    --ring: 247 77% 62%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
+  }
+  ::selection {
+    background: rgb(101 84 232 / 0.18);
+  }
+}
+
+@layer components {
+  .container-narrow {
+    @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
+  }
+  .container-wide {
+    @apply mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+  .gradient-text {
+    @apply bg-gradient-to-r from-brand-600 via-brand-500 to-purple-500 bg-clip-text text-transparent;
+  }
+}
+
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 3px;
+  }
+}

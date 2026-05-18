@@ -1,0 +1,14 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "pnpm --filter @chativo/web build",
+  "installCommand": "pnpm install --frozen-lockfile=false",
+  "outputDirectory": "apps/web/.next",
+  "framework": "nextjs",
+  "regions": ["fra1"],
+  "functions": {
+    "apps/web/app/api/chatbots/[id]/sources/upload/route.ts": { "maxDuration": 60 },
+    "apps/web/app/api/widget/[chatbotId]/message/route.ts":   { "maxDuration": 60 },
+    "apps/web/app/api/chatbots/[id]/test-message/route.ts":   { "maxDuration": 60 },
+    "apps/web/app/api/leads/export/route.ts":                 { "maxDuration": 30 }
+  }
+}

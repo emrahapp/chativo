@@ -1,0 +1,29 @@
+{
+  "name": "chativo",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Chativo.ai — AI customer support agent SaaS (codename: Agently)",
+  "packageManager": "pnpm@9.12.0",
+  "scripts": {
+    "dev": "pnpm --filter @chativo/web dev",
+    "dev:worker": "pnpm --filter @chativo/worker dev",
+    "dev:widget": "pnpm --filter @chativo/widget dev",
+    "build": "pnpm -r build",
+    "build:web": "pnpm --filter @chativo/web build",
+    "build:widget": "pnpm --filter @chativo/widget build",
+    "lint": "pnpm -r lint",
+    "typecheck": "pnpm -r typecheck",
+    "db:types": "supabase gen types typescript --local > packages/db/types.gen.ts",
+    "db:reset": "supabase db reset",
+    "db:push": "supabase db push"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.3",
+    "prettier": "^3.3.3",
+    "prettier-plugin-tailwindcss": "^0.6.8"
+  },
+  "engines": {
+    "node": ">=20.10.0",
+    "pnpm": ">=9.0.0"
+  }
+}
