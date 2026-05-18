@@ -6,6 +6,7 @@ import { runRagChat, type ChatTurn } from "@/lib/llm/chat-rag";
 
 export const runtime = "nodejs";        // pgvector + Node-only deps
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const BodySchema = z.object({
   message: z.string().min(1).max(2000),

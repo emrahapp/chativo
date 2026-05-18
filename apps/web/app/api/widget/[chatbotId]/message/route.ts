@@ -8,6 +8,7 @@ import { getUsageState, incrementUsage } from "@/lib/usage/track";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
+export const maxDuration = 60;
 
 const BodySchema = z.object({
   visitorId: z.string().min(1).max(100),
