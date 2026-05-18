@@ -225,6 +225,61 @@ export async function deleteChatbotAction(chatbotId: string) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────
+// Allowed domains add / remove
+// ─────────────────────────────────────────────────────────────────────────
+export async function addAllowedDomainAction(chatbotId: string, rawDomain: string): Promise<{ ok: boolean; error?: string }> {
+  await requireSession();
+  const cleaned = normalizeDomain(rawDomain);
+  if (!cleaned) return { ok: false, error: "Geçersiz domain" };
+  if (cleaned.length > 200) return { ok: false, error: "Domain çok uzun" };
+  if (!/^[a-z0-9.*-]+\.[a-z]{2,}$/.test(cleaned)) {
+    return { ok: false, error: "Geçersiz domain formatı (örn. ornek.com veya *.ornek.com)" };
+  }
+
+  const supabase = await getSupabaseServer();
+  const { data: existing } = await supabase
+    .from("chatbots")
+    .select("allowed_domains")
+    .eq("id", chatbotId)
+    .single();
+  if (!existing) return { ok: false, error: "Bot bulunamadı" };
+
+  const next = new Set<string>(((existing.allowed_domains as string[] | null) ?? []));
+  next.add(cleaned);
+
+  const { error } = await supabase
+    .from("chatbots")
+    .update({ allowed_domains: Array.from(next) })
+    .eq("id", chatbotId);
+  if (error) return { ok: false, error: error.message };
+
+  revalidatePath(`/chatbots/${chatbotId}`, "layout");
+  return { ok: true };
+}
+
+export async function removeAllowedDomainAction(chatbotId: string, domain: string): Promise<{ ok: boolean; error?: string }> {
+  await requireSession();
+  const supabase = await getSupabaseServer();
+  const { data: existing } = await supabase
+    .from("chatbots")
+    .select("allowed_domains")
+    .eq("id", chatbotId)
+    .single();
+  if (!existing) return { ok: false, error: "Bot bulunamadı" };
+
+  const next = ((existing.allowed_domains as string[] | null) ?? []).filter((d) => d !== domain);
+
+  const { error } = await supabase
+    .from("chatbots")
+    .update({ allowed_domains: next })
+    .eq("id", chatbotId);
+  if (error) return { ok: false, error: error.message };
+
+  revalidatePath(`/chatbots/${chatbotId}`, "layout");
+  return { ok: true };
+}
+
+// ─────────────────────────────────────────────────────────────────────────
 // helpers
 // ─────────────────────────────────────────────────────────────────────────
 function makeDefaults(language: "tr" | "en" | "auto", purpose: string) {

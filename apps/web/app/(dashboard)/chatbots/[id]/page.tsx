@@ -1,10 +1,11 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
-import { Bot, Database, MessagesSquare, Users, Code2, Settings, Sparkles } from "lucide-react";
+import { Bot, Database, MessagesSquare, Users, Code2, Settings, Sparkles, ShieldCheck } from "lucide-react";
 import { getChatbot, countSources } from "@/lib/chatbots/repo";
 import { getSupabaseServer } from "@/lib/supabase/server";
 import { PageHeader } from "@/components/dashboard/page-header";
 import { ChatbotActiveToggle } from "@/components/dashboard/chatbot-active-toggle";
+import { AllowedDomainsEditor } from "@/components/dashboard/allowed-domains";
 import { LivePreview } from "@/components/wizard/live-preview";
 import { CopyButton } from "@/components/wizard/copy-button";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
@@ -92,6 +93,25 @@ export default async function ChatbotDetailPage({
                   variant="outline"
                 />
               </div>
+            </CardContent>
+          </Card>
+
+          {/* Allowed domains */}
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <ShieldCheck className="h-4 w-4 text-brand-500" />
+                İzin verilen domain'ler
+              </CardTitle>
+              <CardDescription>
+                Widget'ın hangi sitelerden çalışabileceğini kısıtla.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <AllowedDomainsEditor
+                chatbotId={chatbot.id}
+                initialDomains={chatbot.allowed_domains ?? []}
+              />
             </CardContent>
           </Card>
 
