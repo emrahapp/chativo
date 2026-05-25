@@ -1,8 +1,9 @@
 import "server-only";
+import { cache } from "react";
 import { getSupabaseServer } from "@/lib/supabase/server";
 
 /** Returns total messages sent this calendar month for an organization. */
-export async function getMonthlyMessageCount(organizationId: string): Promise<number> {
+export const getMonthlyMessageCount = cache(async (organizationId: string): Promise<number> => {
   const supabase = await getSupabaseServer();
   const first = startOfMonthIso();
   const { data, error } = await supabase
@@ -12,7 +13,7 @@ export async function getMonthlyMessageCount(organizationId: string): Promise<nu
     .gte("date", first);
   if (error || !data) return 0;
   return data.reduce((acc, row) => acc + (row.message_count ?? 0), 0);
-}
+});
 
 function startOfMonthIso() {
   const d = new Date();

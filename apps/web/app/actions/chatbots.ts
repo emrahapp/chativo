@@ -225,6 +225,78 @@ export async function deleteChatbotAction(chatbotId: string) {
 }
 
 // ─────────────────────────────────────────────────────────────────────────
+// Full edit (not via wizard)
+// ─────────────────────────────────────────────────────────────────────────
+const FullEditSchema = z.object({
+  chatbotId: z.string().uuid(),
+  name: z.string().min(1).max(80),
+  businessName: z.string().max(120).optional(),
+  language: z.enum(["tr", "en", "auto"]),
+  welcomeMessage: z.string().max(500),
+  fallbackMessage: z.string().max(500),
+  tone: z.enum(["professional", "friendly", "concise", "sales"]),
+  answerLength: z.enum(["short", "normal", "detailed"]),
+  primaryColor: z.string().regex(/^#[0-9A-Fa-f]{6}$/),
+  widgetPosition: z.enum(["bottom-right", "bottom-left"]),
+  theme: z.enum(["light", "dark", "system"]),
+  quickQuestionsRaw: z.string().max(500).optional(),
+  strictKnowledgeBase: z.boolean(),
+  showLeadFormOnFallback: z.boolean(),
+});
+
+export async function fullEditChatbotAction(_prev: FormState | null, fd: FormData): Promise<FormState> {
+  await requireSession();
+  const parsed = FullEditSchema.safeParse({
+    chatbotId: fd.get("chatbotId"),
+    name: fd.get("name"),
+    businessName: fd.get("businessName") || undefined,
+    language: fd.get("language"),
+    welcomeMessage: fd.get("welcomeMessage") ?? "",
+    fallbackMessage: fd.get("fallbackMessage") ?? "",
+    tone: fd.get("tone"),
+    answerLength: fd.get("answerLength"),
+    primaryColor: fd.get("primaryColor") ?? "#6554E8",
+    widgetPosition: fd.get("widgetPosition") ?? "bottom-right",
+    theme: fd.get("theme") ?? "light",
+    quickQuestionsRaw: fd.get("quickQuestions") ?? "",
+    strictKnowledgeBase: fd.get("strictKnowledgeBase") === "on",
+    showLeadFormOnFallback: fd.get("showLeadFormOnFallback") === "on",
+  });
+  if (!parsed.success) return { ok: false, error: parsed.error.errors[0]?.message ?? "Geçersiz bilgi" };
+
+  const quickQuestions = (parsed.data.quickQuestionsRaw ?? "")
+    .split("\n")
+    .map((s) => s.trim())
+    .filter(Boolean)
+    .slice(0, 6)
+    .map((label) => ({ label }));
+
+  const supabase = await getSupabaseServer();
+  const { error } = await supabase
+    .from("chatbots")
+    .update({
+      name: parsed.data.name,
+      business_name: parsed.data.businessName ?? null,
+      language: parsed.data.language,
+      welcome_message: parsed.data.welcomeMessage,
+      fallback_message: parsed.data.fallbackMessage,
+      tone: parsed.data.tone,
+      answer_length: parsed.data.answerLength,
+      primary_color: parsed.data.primaryColor,
+      widget_position: parsed.data.widgetPosition,
+      theme: parsed.data.theme,
+      quick_questions: quickQuestions,
+      strict_knowledge_base: parsed.data.strictKnowledgeBase,
+      show_lead_form_on_fallback: parsed.data.showLeadFormOnFallback,
+    })
+    .eq("id", parsed.data.chatbotId);
+  if (error) return { ok: false, error: error.message };
+
+  revalidatePath(`/chatbots/${parsed.data.chatbotId}`, "layout");
+  return { ok: true, chatbotId: parsed.data.chatbotId };
+}
+
+// ─────────────────────────────────────────────────────────────────────────
 // Allowed domains add / remove
 // ─────────────────────────────────────────────────────────────────────────
 export async function addAllowedDomainAction(chatbotId: string, rawDomain: string): Promise<{ ok: boolean; error?: string }> {

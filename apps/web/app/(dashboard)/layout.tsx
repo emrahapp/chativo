@@ -9,8 +9,9 @@ export default async function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
+  // session is wrapped in React cache() — children calling requireSession() reuse it
   const session = await requireSession();
-  const [used] = await Promise.all([getMonthlyMessageCount(session.organizationId)]);
+  const used = await getMonthlyMessageCount(session.organizationId);
   const planLimits = PLAN_LIMITS[session.planId];
 
   return (

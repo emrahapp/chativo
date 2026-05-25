@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { Globe, MessageSquareText, BookOpen, FileText, AlertCircle } from "lucide-react";
+import { Globe, MessageSquareText, BookOpen, FileText, AlertCircle, Map } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
-import { UrlSourceForm, ManualSourceForm, FaqSourceForm } from "@/components/sources/source-forms";
+import { UrlSourceForm, ManualSourceForm, FaqSourceForm, SitemapSourceForm } from "@/components/sources/source-forms";
 import { FileUploadForm } from "@/components/sources/file-upload-form";
 import { SourceList } from "@/components/sources/source-list";
 import { getSupabaseServer } from "@/lib/supabase/server";
@@ -13,6 +13,7 @@ import type { ChatbotRecord } from "@/lib/chatbots/repo";
 export async function StepSources({ chatbot }: { chatbot: ChatbotRecord }) {
   const session = await requireSession();
   const maxMb = PLAN_LIMITS[session.planId].fileSizeLimitMb;
+  const maxPages = Math.min(PLAN_LIMITS[session.planId].sourceLimit, 200);
   const supabase = await getSupabaseServer();
   const { data: sources } = await supabase
     .from("knowledge_sources")
@@ -34,12 +35,14 @@ export async function StepSources({ chatbot }: { chatbot: ChatbotRecord }) {
       <Tabs defaultValue="url">
         <TabsList>
           <TabsTrigger value="url"><Globe className="h-3.5 w-3.5" />URL</TabsTrigger>
+          <TabsTrigger value="sitemap"><Map className="h-3.5 w-3.5" />Sitemap</TabsTrigger>
           <TabsTrigger value="manual"><MessageSquareText className="h-3.5 w-3.5" />Manuel Metin</TabsTrigger>
           <TabsTrigger value="faq"><BookOpen className="h-3.5 w-3.5" />SSS</TabsTrigger>
           <TabsTrigger value="file"><FileText className="h-3.5 w-3.5" />Dosya</TabsTrigger>
         </TabsList>
 
         <TabsContent value="url"><UrlSourceForm chatbotId={chatbot.id} /></TabsContent>
+        <TabsContent value="sitemap"><SitemapSourceForm chatbotId={chatbot.id} maxPages={maxPages} /></TabsContent>
         <TabsContent value="manual"><ManualSourceForm chatbotId={chatbot.id} /></TabsContent>
         <TabsContent value="faq"><FaqSourceForm chatbotId={chatbot.id} /></TabsContent>
         <TabsContent value="file">

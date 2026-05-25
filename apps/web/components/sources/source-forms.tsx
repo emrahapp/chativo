@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import {
   createUrlSourceAction,
   createManualSourceAction,
+  createSitemapSourcesAction,
   createFaqSourceAction,
   type SourceFormState,
 } from "@/app/actions/sources";
@@ -145,6 +146,53 @@ function FaqSubmit() {
   return (
     <Button type="submit" disabled={pending}>
       {pending ? (<><Loader2 className="h-4 w-4 animate-spin" /> İşleniyor...</>) : (<><Plus className="h-4 w-4" /> SSS'leri eğit</>)}
+    </Button>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Sitemap (multi-page crawl)
+// ─────────────────────────────────────────────────────────────────────
+export function SitemapSourceForm({ chatbotId, maxPages }: { chatbotId: string; maxPages: number }) {
+  const [state, formAction] = useActionState<SourceFormState | null, FormData>(createSitemapSourcesAction, null);
+  return (
+    <form action={formAction} className="space-y-4">
+      <input type="hidden" name="chatbotId" value={chatbotId} />
+      <div className="space-y-2">
+        <Label htmlFor="sitemap-url">Sitemap URL</Label>
+        <Input id="sitemap-url" name="sitemapUrl" placeholder="https://ornek.com/sitemap.xml" required />
+        <p className="text-xs text-muted-foreground">
+          Bare domain (örn. <code>ornek.com</code>) verirsen otomatik <code>/sitemap.xml</code> ekler. Sitemap index'leri (alt sitemap'lere yönlenenler) da otomatik takip edilir.
+        </p>
+      </div>
+      <div className="grid gap-4 sm:grid-cols-3">
+        <div className="space-y-2">
+          <Label htmlFor="max-urls">Maks. sayfa</Label>
+          <Input id="max-urls" name="maxUrls" type="number" min={1} max={maxPages} defaultValue={Math.min(20, maxPages)} />
+          <p className="text-xs text-muted-foreground">Planın sınırı: {maxPages}</p>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="include">İçer (opsiyonel)</Label>
+          <Input id="include" name="includePatterns" placeholder="/blog/, /docs/" />
+          <p className="text-xs text-muted-foreground">Virgül ile ayır</p>
+        </div>
+        <div className="space-y-2">
+          <Label htmlFor="exclude">Hariç tut</Label>
+          <Input id="exclude" name="excludePatterns" placeholder="/admin, .pdf" />
+          <p className="text-xs text-muted-foreground">Virgül ile ayır</p>
+        </div>
+      </div>
+      <FeedbackBar state={state} />
+      <SitemapSubmit />
+    </form>
+  );
+}
+
+function SitemapSubmit() {
+  const { pending } = useFormStatus();
+  return (
+    <Button type="submit" disabled={pending}>
+      {pending ? (<><Loader2 className="h-4 w-4 animate-spin" /> Sitemap taranıyor + eğitiliyor...</>) : (<><Plus className="h-4 w-4" /> Sitemap'i eğit</>)}
     </Button>
   );
 }

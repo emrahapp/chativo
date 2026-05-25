@@ -5,6 +5,7 @@ import { z } from "zod";
 import { requireSession } from "@/lib/auth/get-session";
 import { getSupabaseServer, getSupabaseAdmin } from "@/lib/supabase/server";
 import { ingestSource } from "@/lib/rag/ingest";
+import { fetchSitemap } from "@/lib/rag/sitemap";
 import { PLAN_LIMITS } from "@/lib/plans/limits";
 
 export type SourceFormState = {
@@ -217,6 +218,116 @@ export async function retrainSourceAction(sourceId: string) {
   revalidatePath(`/chatbots/${src.chatbot_id}`, "layout");
   revalidatePath("/knowledge");
   return { ok: true };
+}
+
+// ─────────────────────────────────────────────────────────────────────
+// Sitemap (multi-page) crawl
+// ─────────────────────────────────────────────────────────────────────
+const SitemapSchema = z.object({
+  chatbotId: z.string().uuid(),
+  sitemapUrl: z.string().min(4).max(500),
+  maxUrls: z.coerce.number().int().positive().max(200).default(50),
+  includePatterns: z.string().max(500).optional(),
+  excludePatterns: z.string().max(500).optional(),
+});
+
+export async function createSitemapSourcesAction(
+  _prev: SourceFormState | null,
+  fd: FormData
+): Promise<SourceFormState> {
+  const session = await requireSession();
+  const parsed = SitemapSchema.safeParse({
+    chatbotId: fd.get("chatbotId"),
+    sitemapUrl: fd.get("sitemapUrl"),
+    maxUrls: fd.get("maxUrls") || 50,
+    includePatterns: fd.get("includePatterns") || undefined,
+    excludePatterns: fd.get("excludePatterns") || undefined,
+  });
+  if (!parsed.success) return { ok: false, error: parsed.error.errors[0]?.message ?? "Geçersiz sitemap" };
+
+  const include = (parsed.data.includePatterns ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+  const exclude = (parsed.data.excludePatterns ?? "")
+    .split(",")
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+  // Discover URLs from sitemap
+  let urls: string[];
+  try {
+    urls = await fetchSitemap({
+      url: parsed.data.sitemapUrl,
+      maxUrls: parsed.data.maxUrls,
+      include,
+      exclude,
+    });
+  } catch (err) {
+    return { ok: false, error: err instanceof Error ? err.message : "Sitemap okunamadı" };
+  }
+
+  if (urls.length === 0) {
+    return { ok: false, error: "Sitemap'te eşleşen URL bulunamadı." };
+  }
+
+  // Plan source limit
+  const supabase = await getSupabaseServer();
+  const { count } = await supabase
+    .from("knowledge_sources")
+    .select("id", { count: "exact", head: true })
+    .eq("organization_id", session.organizationId);
+  const limit = PLAN_LIMITS[session.planId].sourceLimit;
+  const remaining = Math.max(0, limit - (count ?? 0));
+  if (remaining <= 0) {
+    return { ok: false, error: `${session.planId.toUpperCase()} planının kaynak limiti dolu (${limit}).` };
+  }
+
+  const toIngest = urls.slice(0, remaining);
+  const successes: string[] = [];
+  const failures: string[] = [];
+
+  for (const url of toIngest) {
+    try {
+      const { data: source, error } = await supabase
+        .from("knowledge_sources")
+        .insert({
+          chatbot_id: parsed.data.chatbotId,
+          organization_id: session.organizationId,
+          type: "website",
+          title: cleanUrlForTitle(url),
+          source_url: url,
+          status: "pending",
+        })
+        .select("id")
+        .single();
+      if (error || !source) {
+        failures.push(url);
+        continue;
+      }
+      await ingestSource({
+        sourceId: source.id,
+        chatbotId: parsed.data.chatbotId,
+        organizationId: session.organizationId,
+        type: "website",
+        payload: { kind: "url", url },
+      });
+      successes.push(url);
+    } catch {
+      failures.push(url);
+    }
+  }
+
+  revalidatePath(`/chatbots/${parsed.data.chatbotId}`, "layout");
+  revalidatePath("/knowledge");
+
+  const total = urls.length;
+  const trimmed = total - toIngest.length;
+  let info = `${successes.length} sayfa başarıyla eğitildi.`;
+  if (failures.length) info += ` ${failures.length} sayfada hata.`;
+  if (trimmed) info += ` ${trimmed} sayfa plan limiti nedeniyle atlandı.`;
+
+  return { ok: successes.length > 0, info, error: successes.length === 0 ? "Hiçbir sayfa eğitilemedi" : undefined };
 }
 
 export async function deleteSourceAction(sourceId: string) {
