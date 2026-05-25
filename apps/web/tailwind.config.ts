@@ -21,20 +21,20 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // ── Chativo brand tokens — gece mavisi / deep navy ───
+        // ── Chativo brand tokens — Link-style vibrant green ──
         brand: {
-          DEFAULT: "#0F172A",
-          50:  "#F1F5F9",
-          100: "#E2E8F0",
-          200: "#CBD5E1",
-          300: "#94A3B8",
-          400: "#64748B",
-          500: "#1E293B",     // primary CTA — almost-black navy (Link Welcome tarzı)
-          600: "#0F172A",     // hover / pressed
-          700: "#0B1220",
-          800: "#070C18",
-          900: "#03060F",
-          950: "#020409",
+          DEFAULT: "#10B981",
+          50:  "#ECFDF5",
+          100: "#D1FAE5",
+          200: "#A7F3D0",
+          300: "#6EE7B7",
+          400: "#34D399",
+          500: "#10B981",     // primary CTA — emerald-500 (Link green tarzı)
+          600: "#059669",     // hover
+          700: "#047857",     // pressed
+          800: "#065F46",
+          900: "#064E3B",
+          950: "#022C22",
         },
         accent2: {
           50:  "#EFF6FF",
@@ -111,7 +111,7 @@ const config: Config = {
         "hero-gradient":
           "linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)",
         "brand-gradient":
-          "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)",
+          "linear-gradient(135deg, #10B981 0%, #059669 100%)",
       },
       keyframes: {
         "fade-in": {

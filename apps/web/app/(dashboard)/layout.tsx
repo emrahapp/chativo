@@ -23,7 +23,8 @@ export default async function DashboardLayout({
       />
       <div className="lg:pl-64">
         <DashboardTopbar />
-        <main className="px-6 py-8">{children}</main>
+        {/* Contained content — Link / Akakçe tarzı, tam genişlikte değil */}
+        <main className="mx-auto w-full max-w-5xl px-6 py-8">{children}</main>
       </div>
     </div>
   );
