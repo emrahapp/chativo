@@ -7,7 +7,7 @@ import type { Locale } from "@/lib/i18n/config";
 
 export function MarketingNav({ t, locale }: { t: Dictionary; locale: Locale }) {
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/60 bg-white/80 backdrop-blur-lg">
+    <header className="sticky top-0 z-50 w-full border-b border-border bg-white">
       <div className="container-wide flex h-16 items-center justify-between">
         <div className="flex items-center gap-10">
           <Link href="/" className="flex items-center gap-2">

@@ -1,11 +1,14 @@
 "use client";
 
-import { LogOut, ChevronUp } from "lucide-react";
+import { LogOut } from "lucide-react";
 import { useState, useTransition } from "react";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { cn } from "@/lib/utils";
 import { signOutAction } from "@/app/actions/auth";
 
+/**
+ * Light-theme user card — Link app tarzı.
+ * Büyük dairesel avatar + ortada isim + email. Tıklanınca logout menüsü açılır.
+ */
 export function UserCard({
   name,
   email,
@@ -20,39 +23,35 @@ export function UserCard({
   const initials = (name || email).split(" ").map((p) => p[0]).slice(0, 2).join("").toUpperCase();
 
   return (
-    <div className="relative mx-3">
+    <div className="relative px-4 pb-3 pt-1">
+      <button
+        type="button"
+        onClick={() => setOpen((s) => !s)}
+        className="flex w-full flex-col items-center gap-2 rounded-xl px-2 py-3 text-center transition-colors hover:bg-secondary/60"
+      >
+        <Avatar className="h-12 w-12 ring-2 ring-secondary">
+          {avatarUrl && <AvatarImage src={avatarUrl} alt={name} />}
+          <AvatarFallback className="text-sm">{initials || "?"}</AvatarFallback>
+        </Avatar>
+        <div className="min-w-0">
+          <p className="truncate text-sm font-semibold text-foreground">{name || email.split("@")[0]}</p>
+          <p className="truncate text-[11px] text-muted-foreground">{email}</p>
+        </div>
+      </button>
+
       {open && (
-        <div className="absolute bottom-full left-0 right-0 z-50 mb-2 overflow-hidden rounded-xl border border-sidebar-border bg-sidebar-accent shadow-soft-lg">
+        <div className="absolute left-4 right-4 top-full z-50 mt-1 overflow-hidden rounded-xl border border-border bg-white shadow-soft-lg">
           <button
             type="button"
             disabled={pending}
             onClick={() => start(() => signOutAction())}
-            className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm text-sidebar-foreground transition-colors hover:bg-sidebar-muted disabled:opacity-50"
+            className="flex w-full items-center gap-2 px-3 py-2.5 text-left text-sm text-foreground transition-colors hover:bg-secondary disabled:opacity-50"
           >
             <LogOut className="h-4 w-4" />
             {pending ? "Çıkış yapılıyor..." : "Çıkış Yap"}
           </button>
         </div>
       )}
-
-      <button
-        type="button"
-        onClick={() => setOpen((s) => !s)}
-        className={cn(
-          "flex w-full items-center gap-3 rounded-xl border border-transparent p-2 text-left transition-colors",
-          "hover:bg-sidebar-accent hover:border-sidebar-border"
-        )}
-      >
-        <Avatar className="h-9 w-9 shrink-0">
-          {avatarUrl && <AvatarImage src={avatarUrl} alt={name} />}
-          <AvatarFallback>{initials || "?"}</AvatarFallback>
-        </Avatar>
-        <div className="min-w-0 flex-1">
-          <p className="truncate text-sm font-medium text-white">{name || email.split("@")[0]}</p>
-          <p className="truncate text-[11px] text-sidebar-muted-foreground">{email}</p>
-        </div>
-        <ChevronUp className={cn("h-4 w-4 text-sidebar-muted-foreground transition-transform", !open && "rotate-180")} />
-      </button>
     </div>
   );
 }

@@ -4,35 +4,35 @@
 
 @layer base {
   :root {
-    /* Background / surfaces */
-    --background: 240 33% 99%;       /* #FAFAFF */
-    --foreground: 220 39% 11%;       /* #111827 */
+    /* Background / surfaces — pure white & slate grays (Akakçe / Link tarzı) */
+    --background: 0 0% 100%;          /* #FFFFFF */
+    --foreground: 222 47% 11%;        /* #0F172A — navy ink */
 
     --card: 0 0% 100%;
-    --card-foreground: 220 39% 11%;
+    --card-foreground: 222 47% 11%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 220 39% 11%;
+    --popover-foreground: 222 47% 11%;
 
-    /* Brand purple as primary (shadcn semantic) */
-    --primary: 247 77% 62%;          /* #6554E8 */
+    /* Navy/black primary — Link "Sign up" button tarzı */
+    --primary: 222 47% 11%;           /* #0F172A */
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 240 9% 96%;
-    --secondary-foreground: 220 39% 11%;
+    --secondary: 210 40% 96%;         /* #F1F5F9 — slate-100 */
+    --secondary-foreground: 222 47% 11%;
 
-    --muted: 240 11% 96%;
-    --muted-foreground: 220 9% 46%;  /* #6B7280 */
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;  /* #64748B — slate-500 */
 
-    --accent: 247 100% 97%;          /* #F0EEFF */
-    --accent-foreground: 247 77% 50%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border: 240 18% 94%;           /* #ECECF4 */
-    --input: 240 18% 94%;
-    --ring: 247 77% 62%;
+    --border: 214 32% 91%;            /* #E2E8F0 — slate-200 */
+    --input: 214 32% 91%;
+    --ring: 222 47% 11%;
 
     --radius: 0.75rem;
   }
@@ -72,7 +72,7 @@
     font-feature-settings: "rlig" 1, "calt" 1, "ss01" 1;
   }
   ::selection {
-    background: rgb(101 84 232 / 0.18);
+    background: rgb(15 23 42 / 0.12);
   }
 }
 
@@ -87,7 +87,7 @@
     text-wrap: balance;
   }
   .gradient-text {
-    @apply bg-gradient-to-r from-brand-600 via-brand-500 to-purple-500 bg-clip-text text-transparent;
+    @apply text-foreground;
   }
 }
 

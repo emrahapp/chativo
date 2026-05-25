@@ -28,7 +28,7 @@ export function LivePreview({ config }: { config: PreviewConfig }) {
       </p>
       <div
         className={cn(
-          "overflow-hidden rounded-3xl border shadow-soft-lg transition-colors",
+          "overflow-hidden rounded-2xl border shadow-soft transition-colors",
           dark ? "border-zinc-700 bg-zinc-900" : "border-border bg-white"
         )}
       >

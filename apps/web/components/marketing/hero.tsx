@@ -8,57 +8,55 @@ import type { Locale } from "@/lib/i18n/config";
 
 export function Hero({ t, locale }: { t: Dictionary; locale: Locale }) {
   return (
-    <section className="relative overflow-hidden bg-hero-gradient">
-      <div className="container-wide grid gap-12 py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-24">
+    <section className="bg-white">
+      <div className="container-wide grid gap-12 py-16 lg:grid-cols-[1.05fr_1fr] lg:gap-16 lg:py-20">
         {/* Left: copy */}
         <div className="flex flex-col justify-center">
-          <Badge variant="default" className="w-fit">
-            <Sparkles className="h-3.5 w-3.5" />
+          <Badge variant="outline" className="w-fit border-border text-muted-foreground">
+            <Sparkles className="h-3.5 w-3.5 text-foreground" />
             {t.hero.badge}
           </Badge>
 
-          <h1 className="mt-6 text-4xl font-semibold leading-[1.1] tracking-tight text-balance text-foreground sm:text-5xl lg:text-6xl">
+          <h1 className="mt-6 text-4xl font-semibold leading-[1.1] tracking-tight text-balance text-foreground sm:text-5xl">
             {t.hero.title_a}{" "}
-            <span className="gradient-text">{t.hero.title_highlight}</span>{" "}
+            <span className="text-foreground">{t.hero.title_highlight}</span>{" "}
             {t.hero.title_b}
           </h1>
 
-          <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-5 max-w-xl text-base leading-relaxed text-muted-foreground">
             {t.hero.subtitle}
           </p>
 
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Button asChild size="xl" variant="gradient">
+          <div className="mt-7 flex flex-wrap items-center gap-2">
+            <Button asChild size="lg">
               <Link href="/register">
                 {t.hero.cta_primary}
-                <ArrowRight className="h-5 w-5" />
+                <ArrowRight className="h-4 w-4" />
               </Link>
             </Button>
-            <Button asChild size="xl" variant="outline">
+            <Button asChild size="lg" variant="outline">
               <Link href="#demo">
-                <PlayCircle className="h-5 w-5" />
+                <PlayCircle className="h-4 w-4" />
                 {t.hero.cta_secondary}
               </Link>
             </Button>
           </div>
 
-          <p className="mt-12 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+          <p className="mt-10 text-xs font-medium uppercase tracking-wider text-muted-foreground">
             {t.hero.trusted_by}
           </p>
-          <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3 opacity-60">
+          <div className="mt-3 flex flex-wrap items-center gap-x-7 gap-y-3">
             {["Trendyol", "ikas", "T-Soft", "Ideasoft", "Ticimax", "Shopify"].map((b) => (
-              <span key={b} className="text-sm font-semibold text-muted-foreground">
+              <span key={b} className="text-sm font-medium text-muted-foreground">
                 {b}
               </span>
             ))}
           </div>
         </div>
 
-        {/* Right: widget preview */}
-        <div className="relative flex items-center justify-center">
-          {/* Soft glow behind widget */}
-          <div className="absolute -inset-8 -z-10 rounded-[3rem] bg-brand-500/10 blur-3xl" />
-          <HeroWidgetPreview locale={locale} className="animate-fade-in" />
+        {/* Right: widget preview — contained card, no glow */}
+        <div className="flex items-center justify-center">
+          <HeroWidgetPreview locale={locale} />
         </div>
       </div>
     </section>

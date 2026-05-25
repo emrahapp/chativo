@@ -37,12 +37,12 @@ export function HeroWidgetPreview({
   return (
     <div
       className={cn(
-        "relative w-full max-w-[380px] overflow-hidden rounded-3xl border border-border/60 bg-white shadow-soft-lg",
+        "relative w-full max-w-[380px] overflow-hidden rounded-2xl border border-border bg-white shadow-soft",
         className
       )}
     >
       {/* Header */}
-      <div className="flex items-center justify-between bg-brand-gradient px-5 py-4 text-white">
+      <div className="flex items-center justify-between bg-brand-500 px-5 py-4 text-white">
         <div className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/15 backdrop-blur-sm">
             <span className="text-sm font-semibold">EA</span>

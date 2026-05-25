@@ -21,28 +21,35 @@ const config: Config = {
     },
     extend: {
       colors: {
-        // ── Chativo brand tokens ─────────────────────────────
+        // ── Chativo brand tokens — gece mavisi / deep navy ───
         brand: {
-          DEFAULT: "#6554E8",
-          50: "#F0EEFF",
-          100: "#E2DEFF",
-          200: "#C8C0FF",
-          300: "#A99DFA",
-          400: "#897BF1",
-          500: "#6554E8",
-          600: "#5544D8",
-          700: "#4434B8",
-          800: "#352890",
-          900: "#231A66",
-          950: "#150F40",
+          DEFAULT: "#0F172A",
+          50:  "#F1F5F9",
+          100: "#E2E8F0",
+          200: "#CBD5E1",
+          300: "#94A3B8",
+          400: "#64748B",
+          500: "#1E293B",     // primary CTA — almost-black navy (Link Welcome tarzı)
+          600: "#0F172A",     // hover / pressed
+          700: "#0B1220",
+          800: "#070C18",
+          900: "#03060F",
+          950: "#020409",
         },
+        accent2: {
+          50:  "#EFF6FF",
+          500: "#2563EB",     // info link blue — minimal kullanım
+          600: "#1D4ED8",
+        },
+        // Sidebar artık LIGHT teması kullanıyor — bu tokenlar legacy hold,
+        // direkt sidebar.tsx zaten light bg-white kullanacak.
         sidebar: {
-          DEFAULT: "#090E1F",
-          accent: "#141A30",
-          muted: "#2A3147",
-          foreground: "#E5E7EB",
-          "muted-foreground": "#9CA3AF",
-          border: "#1F2540",
+          DEFAULT: "#FFFFFF",
+          accent:  "#F1F5F9",
+          muted:   "#E2E8F0",
+          foreground: "#0F172A",
+          "muted-foreground": "#64748B",
+          border:  "#E2E8F0",
         },
         // ── shadcn/ui semantic tokens (CSS vars) ─────────────
         border: "hsl(var(--border))",
@@ -95,15 +102,16 @@ const config: Config = {
         "4xl": "1.5rem",
       },
       boxShadow: {
-        soft: "0 4px 24px rgba(17, 24, 39, 0.06)",
-        "soft-lg": "0 8px 40px rgba(17, 24, 39, 0.08)",
-        glow: "0 8px 32px rgba(101, 84, 232, 0.25)",
+        soft: "0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.06)",
+        "soft-lg": "0 8px 24px rgba(15, 23, 42, 0.08)",
+        glow: "0 8px 24px rgba(15, 23, 42, 0.12)",
       },
       backgroundImage: {
+        // Çok hafif gri tonu — Akakçe / Link tarzı düz beyaz hissi
         "hero-gradient":
-          "radial-gradient(at 30% 20%, rgba(101, 84, 232, 0.10) 0px, transparent 50%), radial-gradient(at 80% 0%, rgba(168, 85, 247, 0.08) 0px, transparent 50%), radial-gradient(at 0% 80%, rgba(59, 130, 246, 0.06) 0px, transparent 50%)",
+          "linear-gradient(180deg, #FFFFFF 0%, #F8FAFC 100%)",
         "brand-gradient":
-          "linear-gradient(135deg, #6554E8 0%, #8B5CF6 100%)",
+          "linear-gradient(135deg, #1E293B 0%, #0F172A 100%)",
       },
       keyframes: {
         "fade-in": {

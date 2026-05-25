@@ -38,18 +38,18 @@ export function SidebarNav({ items }: { items: NavItem[] }) {
             key={item.href}
             href={item.href}
             className={cn(
-              "group flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors",
+              "group flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors",
               active
-                ? "bg-brand-500 text-white shadow-glow"
-                : "text-sidebar-foreground hover:bg-sidebar-accent hover:text-white"
+                ? "bg-secondary text-foreground"
+                : "text-muted-foreground hover:bg-secondary/60 hover:text-foreground"
             )}
           >
-            <Icon className={cn("h-4 w-4 shrink-0", active ? "text-white" : "text-sidebar-muted-foreground group-hover:text-white")} />
+            <Icon className={cn("h-4 w-4 shrink-0", active ? "text-foreground" : "text-muted-foreground group-hover:text-foreground")} />
             <span className="truncate">{item.label}</span>
             {item.badge && (
               <span className={cn(
                 "ml-auto rounded-full px-2 py-0.5 text-[10px] font-semibold",
-                active ? "bg-white/20 text-white" : "bg-sidebar-muted text-sidebar-foreground"
+                active ? "bg-white text-foreground" : "bg-secondary text-muted-foreground"
               )}>
                 {item.badge}
               </span>

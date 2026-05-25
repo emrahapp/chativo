@@ -32,21 +32,28 @@ export function DashboardSidebar({
   }
 
   return (
-    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-sidebar-border bg-sidebar lg:flex">
+    <aside className="fixed inset-y-0 left-0 z-30 hidden w-64 flex-col border-r border-border bg-white lg:flex">
       {/* Logo */}
-      <div className="px-6 pb-2 pt-5">
+      <div className="px-6 pt-5 pb-4">
         <Link href="/overview">
-          <Logo variant="light" />
+          <Logo variant="dark" />
         </Link>
       </div>
 
+      {/* Profile mini-card (Link tarzı) */}
+      <UserCard
+        name={session.name ?? session.email.split("@")[0]!}
+        email={session.email}
+        avatarUrl={session.avatarUrl}
+      />
+
       {/* Nav */}
-      <div className="mt-4 flex-1 overflow-y-auto pb-4">
+      <div className="mt-2 flex-1 overflow-y-auto py-2">
         <SidebarNav items={items} />
       </div>
 
       {/* Plan card */}
-      <div className="pb-3">
+      <div className="px-3 pb-3">
         <PlanCard
           planName={session.planId.charAt(0).toUpperCase() + session.planId.slice(1)}
           used={usage.messagesThisMonth}
@@ -55,13 +62,18 @@ export function DashboardSidebar({
         />
       </div>
 
-      {/* User card */}
-      <div className="border-t border-sidebar-border pb-4 pt-4">
-        <UserCard
-          name={session.name ?? session.email.split("@")[0]!}
-          email={session.email}
-          avatarUrl={session.avatarUrl}
-        />
+      {/* Footer help + legal — Link tarzı */}
+      <div className="border-t border-border px-6 py-4">
+        <div className="text-center">
+          <Link href="/support" className="inline-block rounded-lg bg-secondary px-3 py-1.5 text-xs font-medium text-foreground hover:bg-secondary/70">
+            Help
+          </Link>
+        </div>
+        <div className="mt-3 flex items-center justify-center gap-4 text-[11px] text-muted-foreground">
+          <Link href="/terms" className="hover:text-foreground">Terms</Link>
+          <Link href="/privacy" className="hover:text-foreground">Privacy</Link>
+          <Link href="/kvkk" className="hover:text-foreground">KVKK</Link>
+        </div>
       </div>
     </aside>
   );

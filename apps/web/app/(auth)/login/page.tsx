@@ -10,10 +10,10 @@ export default async function LoginPage({
   const { next, error } = await searchParams;
   return (
     <div className="space-y-7">
-      <div>
-        <h1 className="text-2xl font-semibold tracking-tight">Hoş geldin</h1>
+      <div className="text-center">
+        <h1 className="text-2xl font-semibold tracking-tight text-foreground">Tekrar hoş geldin</h1>
         <p className="mt-1.5 text-sm text-muted-foreground">
-          Chativo hesabına giriş yap ve botlarını yönet.
+          Chativo hesabına giriş yap.
         </p>
       </div>
 
