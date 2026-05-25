@@ -3,6 +3,7 @@ import { z } from "zod";
 import { getSupabaseAdmin } from "@/lib/supabase/server";
 import { loadWidgetChatbot, corsHeaders } from "@/lib/widget/auth-widget";
 import { checkRate, clientIpFromHeaders } from "@/lib/widget/rate-limit";
+import { dispatchEvent } from "@/lib/webhooks/dispatch";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -63,6 +64,22 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ cha
 
   // Link lead onto conversation for the dashboard.
   await admin.from("conversations").update({ lead_id: lead.id }).eq("id", body.conversationId);
+
+  // Fire outgoing webhook (fire-and-forget)
+  void dispatchEvent({
+    organizationId: auth.chatbot.organization_id,
+    eventType: "lead.created",
+    payload: {
+      id: lead.id,
+      chatbotId: auth.chatbot.id,
+      conversationId: body.conversationId,
+      name: body.name ?? null,
+      email: body.email ?? null,
+      phone: body.phone ?? null,
+      company: body.company ?? null,
+      message: body.message ?? null,
+    },
+  });
 
   return Response.json({ ok: true, leadId: lead.id }, { headers: corsHeaders(origin) });
 }
