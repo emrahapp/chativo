@@ -80,7 +80,7 @@ create table if not exists public.plans (
 );
 
 insert into public.plans (id, name, monthly_message_limit, chatbot_limit, source_limit, team_members_limit, remove_branding, white_label, price_monthly_usd, price_yearly_usd) values
-  ('free',    'Free',    50,    1,  1,  1,  false, false, 0,    0),
+  ('free',    'Free',    50,    1,  10, 1,  false, false, 0,    0),
   ('starter', 'Starter', 1000,  1,  5,  2,  false, false, 19,   190),
   ('pro',     'Pro',     10000, 5,  25, 5,  true,  false, 49,   490),
   ('agency',  'Agency',  50000, 25, 100,15, true,  true,  149,  1490)

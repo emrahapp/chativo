@@ -69,7 +69,7 @@
     "free": {
       "name": "Free",
       "price": "₺0",
-      "features": ["1 chatbot", "50 mesaj/ay", "1 veri kaynağı", "Chativo branding"]
+      "features": ["1 chatbot", "50 mesaj/ay", "10 veri kaynağı", "Chativo branding"]
     },
     "starter": {
       "name": "Starter",

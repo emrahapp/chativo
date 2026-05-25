@@ -9,7 +9,7 @@ export const PLAN_LIMITS: Record<PlanId, PlanLimits> = {
   free: {
     monthlyMessageLimit: 50,
     chatbotLimit: 1,
-    sourceLimit: 1,
+    sourceLimit: 10,           // demo / test için makul; production'da geri çekebiliriz
     fileSizeLimitMb: 25,
     teamMembersLimit: 1,
     removeBranding: false,
