@@ -11,11 +11,24 @@
 
 ## Mevcut durum (2026-05-19)
 
-**Faz 1 MVP production'da canlı.** https://www.chativo.ai
+**Faz 1 MVP + Faz 2 infrastructure production'da canlı.** https://www.chativo.ai
 
-Çalışan akış: register → email confirm → /overview → "Yeni Chatbot" → wizard (6 adım) → URL/PDF/manual/FAQ ingest → RAG playground → widget embed → conversations + leads + analytics + admin.
+Faz 1 çalışan akış: register → email confirm → /overview → "Yeni Chatbot" → wizard (6 adım) → URL/PDF/sitemap/manual/FAQ ingest → RAG playground → widget embed → conversations + leads + analytics + admin.
 
-Son commit: `bc6fbab` — allowed_domains editor + Stripe setup guide.
+Faz 2 INFRASTRUCTURE hazır (kod var, 3rd party setup `USER_TODO.md`'de):
+- ✅ Sitemap crawler + multi-page ingest (aktif)
+- ✅ Telegram channel adapter (token girince aktif)
+- ✅ WhatsApp Cloud API adapter (Meta token girince aktif)
+- ✅ Outgoing webhooks + HMAC signature (Zapier/Make uyumlu)
+- ✅ iyzico TR ödeme (API keys girince aktif)
+- ✅ BYOK Anthropic + OpenRouter (encrypted storage)
+- ✅ Multi-model select per-bot
+- ✅ Live agent handoff (ai_paused, notes, agent reply)
+- ✅ Action Builder execute (UI sonraki sprint)
+- ✅ Channel-agnostic message ingest (`lib/channels/ingest.ts`)
+- ✅ Performance: React `cache()` ile session helper (3-5x hızlı dashboard)
+- ⚠️ White-label custom domain: DB column hazır, UI eksik
+- ⚠️ Action Builder UI: type'lar + execute hazır, dashboard UI eksik
 
 ## Tech stack
 
@@ -35,15 +48,26 @@ Son commit: `bc6fbab` — allowed_domains editor + Stripe setup guide.
 - `next.config.ts`: `typescript.ignoreBuildErrors: true` (MVP deploy için geçici)
 - Admin: profile.is_admin OR ADMIN_EMAILS env'de listede
 
-## Pending — Faz 2 öncelik sırası
+## Pending — Faz 2 sırada bekleyen
 
-1. **Stripe live** — kod hazır (`lib/stripe/*`, `/api/billing/*`), env vars eksik. See [STRIPE_SETUP.md](STRIPE_SETUP.md).
-2. **Polish:** TypeScript build check'i geri aç + gerçek type hatalarını fix
-3. **Upstash Redis** rate limit (production multi-instance scaling için)
-4. **iyzico TR ödeme** (TR pazar için)
-5. **WhatsApp Cloud API** (channel adapter)
-6. **Sitemap crawler + auto-sync** (knowledge quality boost)
-7. **White-label + BYOK + multi-model** (agency mode)
+Kod hazır + sadece 3rd party setup bekleyen → [USER_TODO.md](USER_TODO.md):
+1. Supabase migration 0003 — kullanıcı SQL Editor'de çalıştıracak
+2. Telegram bot connect (5 dk)
+3. Stripe live mode activation
+4. iyzico merchant onayı (1-3 gün)
+5. WhatsApp Meta Business doğrulaması (1-2 hafta)
+6. Upstash Redis
+7. Resend (email)
+
+Kod tarafında pending:
+- White-label settings UI (DB column var, UI eksik)
+- Action Builder dashboard UI (lib hazır, ekrana eklenmedi)
+- Live agent UI on /conversations/[id] (action hazır, UI eksik)
+- Channels settings UI (action hazır, settings sekmesi eksik)
+- Webhooks settings UI (action hazır, settings sekmesi eksik)
+- Sitemap auto-sync (cron + UI)
+- TypeScript build check'i geri aç + type cleanup
+- Upstash Redis rate-limit'i Upstash'e bağla (paket zaten var)
 
 ## Önemli mimari kurallar
 
